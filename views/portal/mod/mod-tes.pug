@@ -1,0 +1,21 @@
+.white-wrapper
+    .container
+        .row
+            .col-sm-12
+                h1 Halaman Tes
+                if (session.is_login)
+                    script(type='text/javascript').
+                        $(document).ready(function(){
+                            $.ajax({
+                                url: '#{base_url}api/dataopd',
+                                dataType: "json",
+                                success: function(data) {
+                                    $.each(data.download,function(key,row){
+                                        if ('#{session.user.id_opd}' == row.id_opd ){
+                                            $('#tes').append('<p><small>'+row.nama_file+'</small></p>');
+                                        }
+                                    });
+                                    }//end data return. 
+                                });
+                            });
+                    #tes

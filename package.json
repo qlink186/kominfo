@@ -1,0 +1,39 @@
+{
+  "name": "kominfo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "ajax-request": "^1.2.3",
+    "async": "^2.6.0",
+    "body-parser": "~1.18.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "express-breadcrumbs": "0.0.2",
+    "express-fileupload": "^0.4.0",
+    "express-flash": "0.0.2",
+    "express-myconnection": "^1.0.4",
+    "express-paginate": "^0.3.0",
+    "express-session": "^1.15.6",
+    "express-validator": "^2.21.0",
+    "fs": "0.0.1-security",
+    "helmet": "^3.12.0",
+    "less-middleware": "^2.2.1",
+    "md5": "^2.2.1",
+    "method-override": "^2.3.10",
+    "morgan": "~1.9.0",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.2",
+    "orm": "^4.0.2",
+    "pug": "2.0.0-beta11",
+    "req-flash": "0.0.3",
+    "request": "^2.85.0",
+    "rss-parser": "^2.11.0",
+    "serve-favicon": "~2.4.5",
+    "then-busboy": "^2.1.4"
+  }
+}

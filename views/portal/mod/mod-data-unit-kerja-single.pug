@@ -1,0 +1,14 @@
+.container
+    .main-wrapper.search-env
+        .row
+            .col-md-12
+                include mod-search-home
+.white-wrapper
+    .container
+        .row
+            .col-md-12
+                h5.subpage-title
+                    span=dataopdview.nama_opd
+                    a.btn-xs.btn-flat.flat-danger.pull-right(href=base_url+'data/unitkerja')
+                        span UNIT KERJA LAINNYA
+                p=dataopdview.id_opd

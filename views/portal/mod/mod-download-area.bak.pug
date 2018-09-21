@@ -1,0 +1,110 @@
+.white-wrapper
+    .container
+        .row
+            .col-sm-12
+                script(type='text/javascript').
+                    jQuery(document).ready(function($)
+                    {
+                        $("#table-download-area").dataTable(
+                            {
+                            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Semua"]],
+                            dom: "<'row'<'col-md-5 col-xs-12'l><'col-md-7 col-xs-12 hidden-xs'Tf>r>"+
+                                    "t"+
+                                    "<'row'<'col-md-6 col-xs-12'i><'col-md-6 col-xs-12'p>>",
+                            tableTools: {
+                                sSwfPath: "./adm-assets/js/datatables/tabletools/copy_csv_xls_pdf.swf"
+                            },
+                            "deferRender": true,
+                            "processing":true,
+                            select: true
+                        }).yadcf([
+                            {column_number : 0, filter_type: 'text'},
+                            {column_number : 1, filter_type: 'text'},
+                            {column_number : 2},
+                            {column_number : 3},
+                            {column_number : 
+                                4,
+                                filter_type: 'text'
+                            },
+                            {column_number : 5, filter_type: 'text'},
+                        ]);
+                    });
+                table#table-download-area.table.table-hover.table-responsive
+                    thead
+                        tr
+                            th(width='40px').text-center.hidden-xs Format
+                            th.text-center Nama File
+                            th.text-center.hidden-xs Jenis Dok.
+                            th.text-center.hidden-xs Jenis Inf.
+                            th.text-center.hidden-xs Tanggal Dokumen
+                            th.text-center.hidden-xs Aksi
+                    tbody
+                        for dw, index in datadownload
+                            tr
+                                td.hidden-xs
+                                    img.img-responsive.center-block(src=base_url+'adm-assets/images/ico/'+dw.format_file+'.svg')
+                                td
+                                    table.table.table-condensed
+                                        tbody
+                                            tr
+                                                td(colspan='3')
+                                                    a(href=base_url+'data-download/'+dw.link_file).lead=dw.nama_file
+                                            tr
+                                                td.visible-xs
+                                                    |   Deskripsi
+                                                td.visible-xs
+                                                    |    : 
+                                                td.visible-xs=dw.deskripsi_file
+                                                td.hidden-xs=dw.deskripsi_file
+                                            tr.visible-xs
+                                                td
+                                                    |   Jenis Dokumen
+                                                td
+                                                    |    : 
+                                                td=dw.jenis_file
+                                            tr.visible-xs
+                                                td
+                                                    |   Jenis Informasi
+                                                td
+                                                    |    : 
+                                                td
+                                                    .label.label-secondary=dw.kategori_dip
+                                            tr.visible-xs
+                                                td
+                                                    |   Tanggal Dokumen
+                                                td
+                                                    |    : 
+                                                td=dw.tgl_file
+                                            tr.visible-xs
+                                                td(colspan='3')
+                                                    a.btn.btn-red.btn-xs.btn-icon.btn-icon-standalone.pull-right(href=base_url+'data-download/'+dw.link_file)
+                                                        i.fa-download
+                                                        span Download Dokumen (.
+                                                            =dw.format_file+')'
+                                td.hidden-xs.text-center=dw.jenis_file
+                                td.hidden-xs.text-center
+                                    .label.label-secondary=dw.kat_dip
+                                td.hidden-xs.text-center=dw.tgl_file
+                                td.hidden-xs.text-center
+                                    a.btn.btn-red.btn-sm.btn-icon.btn-icon-standalone(href=base_url+'data-download/'+dw.link_file)
+                                        i.fa-download
+                                        span Download
+            .col-sm-12
+                h5.subpage-title
+                    span Keterangan
+                ul
+                    li 
+                        .label.label-secondary SM
+                        |   : Informasi Serta Merta adalah Informasi yang dapat mengancam hajat hidup orang banyak dan ketertiban umum yang wajib diumumkan secara serta merta
+                    li 
+                        .label.label-blue SS
+                        |   : Informasi Yang Tersedia Setiap Saat meliputi : Daftar Seluruh Informasi Publik yang berada di bawah penguasaannya, tidak termasuk informasi yang dikecualikan, hasil keputusan badan publik dan pertimbangannya, seluruh kebijakan yang ada berikut dokumen pendukungnya, rencana kerja proyek termasuk di dalamnya perkiraan pengeluaran tahunan Badan Publik, perjanjian Badan Publik dengan pihak ketiga, informasi dan kebijakan yang disampaikan Pejabat Publik dalam pertemuan yang terbuka untuk umum, prosedur kerja pegawai Badan Publik yang berkaitan dengan pelayanan masyarakat, dan / atau laporan mengenai pelayanan akses informasi publik. Untuk memperoleh informasi, wajib melakukan permohonan informasi kepada Pejabat Pengelola Informasi dan Dokumentasi (PPID)
+                    li 
+                        .label.label-warning BK
+                        |   : Informasi yang wajib diumukan secara berkala (paling singkat 6 bulan sekali), Informasi yang berkaitan dengan Badan Publik, Informasi mengenai kegiatan dan kinerja Badan Publik terkait, Informasi mengenai Laporan Keuangan
+                    li 
+                        .label.label-danger DK
+                        |   : Informasi DiKecualikan yaitu Informasi yang tidak boleh dibuka untuk umum
+                    li
+                        .label.label-purple HU
+                        |   : Produk Hukum
