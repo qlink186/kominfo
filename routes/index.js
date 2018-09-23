@@ -213,7 +213,7 @@ function gallery_album_data(req, res, next)
 {
 	var session = req.session;
 	req.getConnection(function(err,connection){
-		var query = connection.query('SELECT * FROM d_gallery_album ORDER BY tgl_post ASC',function(err,rows)
+		var query = connection.query('SELECT * FROM v_gallery_album ORDER BY tgl_terbit ASC',function(err,rows)
 		{
 			if(err){
 				var errornya  = ("Error Memilih : %s ",err );
@@ -230,7 +230,7 @@ function gallery_data(req, res, next)
 {
 	var session = req.session;
 	req.getConnection(function(err,connection){
-		var query = connection.query('SELECT * FROM d_gallery ORDER BY tgl_post ASC',function(err,rows)
+		var query = connection.query('SELECT * FROM v_gallery ORDER BY tgl_terbit ASC',function(err,rows)
 		{
 			if(err){
 				var errornya  = ("Error Memilih : %s ",err );
@@ -487,7 +487,7 @@ function(req, res, next) {
 	});
 });
 
-router.get('/data/unitkerja', 
+router.get('/data/unitkerja',
 berita_populer_data,
 data_unit_kerja,
 data_subdomain,
@@ -511,7 +511,8 @@ function(req, res, next) {
 	});
 });
 
-router.get('/data/internal-opd', 
+router.get('/data/internal-opd',
+authentication_mdl.is_login,
 berita_populer_data,
 data_unit_kerja,
 data_subdomain,
@@ -536,7 +537,8 @@ function(req, res, next) {
 	});
 });
 
-router.get('/data/internal/kepegawaian', 
+router.get('/data/internal/kepegawaian',
+authentication_mdl.is_login,
 berita_populer_data,
 data_unit_kerja,
 data_subdomain,
@@ -563,7 +565,8 @@ function(req, res, next) {
 	});
 });
 
-router.get('/data/internal/reg-email', 
+router.get('/data/internal/reg-email',
+authentication_mdl.is_login,
 berita_populer_data,
 data_unit_kerja,
 data_subdomain,
@@ -588,7 +591,8 @@ function(req, res, next) {
 	});
 });
 
-router.get('/data/internal/reg-subdomain', 
+router.get('/data/internal/reg-subdomain',
+authentication_mdl.is_login,
 berita_populer_data,
 data_unit_kerja,
 data_subdomain,

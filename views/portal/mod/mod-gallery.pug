@@ -59,6 +59,52 @@
                                         a(href='#', data-filter='.outside') Outside
                                     li
                                         a(href='#', data-filter='.photography') Photography
+                .col-sm-9
+                    h5.subpage-title
+                        span Gallery
+                    .row
+                        #gallery-container
+                            script(type='text/javascript').
+                                $(document).ready(function(){
+                                    $.ajax({
+                                        url: '#{api_url}gallery',
+                                        dataType: "json",
+                                        success: function(data) {
+                                            $.each(data.gallery,function(key,row){
+                                                var id_gallery = row["id_gallery"];
+                                                var id_gallery_album = row["id_gallery_album"];
+                                                var th_album = row["th_album"];
+                                                var nama_album = row["nama_album"];
+                                                var judul_gambar = row["judul_gambar"];
+                                                var thumb = row["alamat_file_thumb"];
+                                                var small = row["alamat_file_small"];
+                                                var big = row["alamat_file_big"];
+                                                var tgl_gambar = row["tgl_gambar"];
+                                                $('#gal').append('<div class="col-xs-12.col-sm-6 col-md-4 gallery-item-wrapper '+nama_album+' '+th_album+'">'
+                                                +   '<div class="gallery-item">'
+                                                +       '<div class="gallery-thumb">'
+                                                +           '<img class="img-responsive" src="'+thumb+'" alt="'+judul_gambar+'" />'
+                                                +               '<div class="image-overlay"></div>'
+                                                +               '<a class="gallery-zoom" rel="prettyPhoto[pp_gal'+nama_album+']" href="'+big+'">'
+                                                +                   '<i class="fa-eye" />'
+                                                +               '</a>'
+                                                +               '<a class="gallery-link" href="'+big+'" target="_BLANK" >'
+                                                +                   '<i class="fa-link" />'
+                                                +               '</a>'
+                                                +           '</div>'
+                                                +           '<div class="gallery-content">'
+                                                +               '<h5>'+judul_gambar+'</h5>'
+                                                +               '<span>'+tgl_gambar+'</span>'
+                                                +           '</div>'
+                                                +       '</div>'
+                                                +   '</div>'
+                                                +'</div>');
+                                            });
+                                        }//end data return. 
+                                    });
+                                });
+                            #gal
+                                
                 //.col-sm-9
                     h5.subpage-title
                         span Gallery
