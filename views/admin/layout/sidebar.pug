@@ -18,6 +18,8 @@
 - var menu_artikel_komentar = menu_home+'/artikel-komentar';
 - var link_artikel_editor = adm_url+'artikel-editor';
 - var menu_artikel_editor = menu_home+'/artikel-editor';
+- var link_log_berita = adm_url+'log-berita';
+- var menu_log_berita = menu_home+'/log-berita';
 
 .sidebar-menu.toggle-others.fixed
     .sidebar-menu-inner
@@ -263,7 +265,7 @@
                 a(href=base_url+'adm-buku-tamu')
                     i.entypo-book-open
                     span.title Buku Tamu
-            li(class=(menu === 'adm-setting-profile' ? ['active','opened'] : ''), class=(menu === 'adm-setting-sistem' ? ['active','opened'] : ''), class=(menu === 'adm-setting-db' ? ['active','opened'] : ''), class=(menu === 'adm-setting-log' ? ['active','opened'] : ''))
+            li(class=(menu === 'adm-setting-profile' ? ['active','opened'] : ''), class=(menu === 'adm-setting-sistem' ? ['active','opened'] : ''), class=(menu === 'adm-setting-db' ? ['active','opened'] : ''), class=(menu === menu_log_berita ? ['active','opened'] : ''))
                 a(href=base_url+'adm-setting-profile')
                     i.entypo-cog
                     span.title Pengaturan
@@ -282,8 +284,8 @@
                                 i.entypo-database
                                 span.title Backup Database
                     else
-                    li(class=(menu === 'adm-setting-log' ? 'active' : ''))
-                        a(href=base_url+'adm-setting-log')
+                    li(class=(menu ===menu_log_berita ? 'active' : ''))
+                        a(href=link_log_berita)
                             i.entypo-alert
                             span.title Log Record
             li.visible-xs

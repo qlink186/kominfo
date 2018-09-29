@@ -20,6 +20,8 @@
             .form-group-separator
         script(type='text/javascript').
             var oTable;
+            var sess = '#{session.user.id_hakakses}';
+            var sessygbikin = '#{session.user.id_user}';
             jQuery(document).ready(function($)
             {
                 'use strict';
@@ -138,8 +140,58 @@
                             "class":"text-center hidden-xs",
                             "render": function ( data, type, row ){
                                 var status = row["status"];
+                                var id_user = row["id_user"];
                                 var status_berita = '<div class="statusDok"><strong>'+row["status_berita"]+'</strong></div>';
-                                return status_berita+'<button class="btn btn-info btn-icon btn-icon-standalone btn-xs btn-block" type="button"><i class="entypo-pencil"></i><span>Ubah</span></button><button class="btn btn-secondary btn-icon btn-icon-standalone btn-xs btn-block" type="button" href="javascript:;" onclick="jQuery(id="#{konfirmTerbitkan}") modal(show {backdrop:"fade"});"><i class="entypo-check"></i><span>Terbitkan</span></button><button class="btn btn-primary btn-icon btn-icon-standalone btn-xs btn-block" type="button" href="javascript:;" onclick="jQuery("#{konfirmDraft}").modal("show", {backdrop:"fade"});"><i class="entypo-archive"></i><span>Draft</span></button><button class="btn btn-danger btn-icon btn-icon-standalone btn-xs btn-block" type="button" href="javascript:;" onclick="jQuery("#{konfirmHapus}").modal("show", {backdrop:"fade"});"><i class="entypo-trash"></i><span>Hapus</span></button>';
+
+
+
+                                if (sess == 0){
+                                    var tampil_tombol = status_berita
+                                            +'<button class="btn btn-info btn-icon btn-icon-standalone btn-xs btn-block" type="button">'
+                                            +   '<i class="entypo-pencil"></i>'
+                                            +   '<span>Ubah</span>'
+                                            +'</button>'
+                                            +'<button class="btn btn-secondary btn-icon btn-icon-standalone btn-xs btn-block" type="button" href="javascript:;" onclick="jQuery(id="#{konfirmTerbitkan}") modal(show {backdrop:"fade"});">'
+                                            +   '<i class="entypo-check"></i>'
+                                            +   '<span>Terbitkan</span>'
+                                            +'</button>'
+                                            +'<button class="btn btn-danger btn-icon btn-icon-standalone btn-xs btn-block" type="button" href="javascript:;" onclick="jQuery("#{konfirmHapus}").modal("show", {backdrop:"fade"});">'
+                                            +   '<i class="entypo-trash"></i>'
+                                            +   '<span>Hapus</span>'
+                                            +'</button>';
+                                } else if (sess == 2){
+                                    var tampil_tombol = status_berita
+                                            +'<button class="btn btn-info btn-icon btn-icon-standalone btn-xs btn-block" type="button">'
+                                            +   '<i class="entypo-pencil"></i>'
+                                            +   '<span>Ubah</span>'
+                                            +'</button>'
+                                            +'<button class="btn btn-secondary btn-icon btn-icon-standalone btn-xs btn-block" type="button" href="javascript:;" onclick="jQuery(id="#{konfirmTerbitkan}") modal(show {backdrop:"fade"});">'
+                                            +   '<i class="entypo-check"></i>'
+                                            +   '<span>Terbitkan</span>'
+                                            +'</button>'
+                                            +'<button class="btn btn-danger btn-icon btn-icon-standalone btn-xs btn-block" type="button" href="javascript:;" onclick="jQuery("#{konfirmHapus}").modal("show", {backdrop:"fade"});">'
+                                            +   '<i class="entypo-trash"></i>'
+                                            +   '<span>Hapus</span>'
+                                            +'</button>';
+                                } else {
+                                    if (sessygbikin == id_user ){
+                                        var tampil_tombol = status_berita
+                                            +'<button class="btn btn-info btn-icon btn-icon-standalone btn-xs btn-block" type="button">'
+                                            +   '<i class="entypo-pencil"></i>'
+                                            +   '<span>Ubah</span>'
+                                            +'</button>'
+                                            +'<button class="btn btn-danger btn-icon btn-icon-standalone btn-xs btn-block" type="button" href="javascript:;" onclick="jQuery("#{konfirmHapus}").modal("show", {backdrop:"fade"});">'
+                                            +   '<i class="entypo-trash"></i>'
+                                            +   '<span>Hapus</span>'
+                                            +'</button>';
+                                    } else {
+                                        var tampil_tombol = status_berita;
+                                    }
+                                }
+                                return tampil_tombol;
+
+
+
                             },
                             "targets": 7
                         }
@@ -226,6 +278,6 @@
                     th.text-center.small Tgl Tulis
                     th.text-center.small Tgl Terbit / Hapus
                     th.text-center.small.hidden
-                    th(width='40px').text-center.small Aksi
+                    th(width='70px').text-center.small Aksi
 include mod-modal-artikel-list.pug
 include mod-notifikasi-toastr.pug

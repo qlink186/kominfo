@@ -489,23 +489,15 @@ function(req, res, next) {
         });
     });
 });
+
 /* ---------------- START LIST ARTIKEL ----------------  */
 router.get('/artikel-list',
 authentication_mdl.is_login,
 function(req, res, next) {
-	req.getConnection(function(err,connection){
-        var query = connection.query('SELECT d_berita.*, d_berita_kategori.kategori as kategori, m_peg.gelar_depan as gelar_depan, m_peg.gelar_belakang as gelar_belakang, m_peg.nama as penulis FROM d_berita LEFT JOIN d_berita_kategori ON d_berita.id_kategori = d_berita_kategori.id_kategori LEFT JOIN d_users ON d_berita.id_user = d_users.id_user LEFT JOIN m_peg ON d_users.id_peg = m_peg.id_peg ORDER BY tgl_post DESC',
-        function(err,rows){
-			if(err)
-				var errornya  = ("Error Memilih : %s ",err );
-			req.flash('msg_error', errornya);
-			res.render('admin/adm-artikel-list',{
-				title:'Data Artikel', 
-				artikel_list:rows, 
-				menu:'admin/artikel-list', 
-				session: req.session
-			});
-		});
+	res.render('admin/adm-artikel-list',{
+		title:'Data Artikel', 
+		menu:'admin/artikel-list', 
+		session: req.session
 	});
 });
 /* ---------------- FINISH LIST ARTIKEL ----------------  */
@@ -811,6 +803,18 @@ router.get('/adm-artikel-editor', authentication_mdl.is_login, function(req, res
          //console.log(query.sql);
      });
 });
+
+/* ---------------- START LOG BERITA ----------------  */
+router.get('/log-berita',
+authentication_mdl.is_login,
+function(req, res, next) {
+	res.render('admin/adm-log-berita', {
+		title: 'Log Berita',
+		menu: 'admin/log-berita',
+		session: req.session
+	});
+});
+/* ---------------- FINISH LOG BERITA ----------------  */
 
 //kepegawaian
 router.get('/kepegawaian-list', 

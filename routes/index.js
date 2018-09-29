@@ -5,6 +5,7 @@ var http = require('http');
 var async = require('async');
 var modul = require('../modul/modul');
 var authentication_mdl = require('../middlewares/authentication');
+var accesslog = require('access-log');
 var fs = require('fs');
 
 var session_store;
@@ -258,6 +259,7 @@ function(req, res, next) {
 	req.getConnection(function(err,connection){
 		var query = connection.query('SELECT * FROM v_berita_home',function(err,rows)
 		{
+			accesslog(req, res);
 			if(err)
 				var errornya  = ("Error Memilih : %s ",err );
 			req.flash('msg_error', errornya);
@@ -286,6 +288,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/tes', { 
 		title: 'Tes', 
 		menu:'data/tes',
@@ -315,6 +318,7 @@ function(req, res) {
 	req.getConnection(function(err,connection){
 		var query = connection.query('SELECT * FROM v_berita',function(err,rows)
 		{
+			accesslog(req, res);
 			if(err)
 				var errornya  = ("Error Selecting : %s ",err );
 			req.flash('msg_error', errornya);
@@ -353,6 +357,7 @@ function(req,res,next){
 		var id_berita =req.params.link;
 		var query = connection.query('SELECT * FROM v_berita where id_berita='+id_berita,function(err,rows)
 		{
+			accesslog(req, res);
 			if(err)
 			{
 				var errornya  = ("Error Selecting : %s ",err );
@@ -403,6 +408,7 @@ function(req,res,next){
 		var id_berita =req.params.link;
 		var query = connection.query('SELECT * FROM v_berita where id_berita='+id_berita,function(err,rows)
 		{
+			accesslog(req, res);
 			if(err)
 			{
 				var errornya  = ("Error Selecting : %s ",err );
@@ -447,6 +453,7 @@ data_subdomain,
 peg_jum,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/data', { 
 		title: 'Data', 
 		menu:'data',
@@ -470,6 +477,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/data', { 
 		title: 'Data Pegawai', 
 		menu:'data/peg',
@@ -494,6 +502,7 @@ data_subdomain,
 data_download_home,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/data', { 
 		title: 'Data Unit Kerja', 
 		menu:'data/unitkerja',
@@ -520,6 +529,7 @@ data_download_home,
 pranala_data,
 authentication_mdl.is_login,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/data', { 
 		title: 'Data Internal OPD', 
 		menu:'data/internal-opd',
@@ -547,6 +557,7 @@ pranala_data,
 peg_jum,
 authentication_mdl.is_login,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/data-internal-instansi', { 
 		title: 'Data Kepegawaian '+req.session.user.nama_opd, 
 		menu:'data/internal/kepegawaian',
@@ -574,6 +585,7 @@ data_download_home,
 pranala_data,
 authentication_mdl.is_login,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/data-internal-instansi', { 
 		title: 'Data Kepegawaian '+req.session.user.nama_opd, 
 		menu:'data/internal/kepegawaian',
@@ -600,6 +612,7 @@ data_download_home,
 pranala_data,
 authentication_mdl.is_login,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/data-internal-instansi', { 
 		title: 'Data Kepegawaian '+req.session.user.nama_opd, 
 		menu:'data/internal/kepegawaian',
@@ -627,6 +640,7 @@ function(req,res,next){
 	req.getConnection(function(err,connection){
 		var query = connection.query('SELECT * FROM v_opd where id_opd='+req.params.id,function(err,rows)
 		{
+			accesslog(req, res);
 			if(err)
 			{
 				var errornya  = ("Error Selecting : %s ",err );
@@ -667,6 +681,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/data', { 
 		title: 'Download Area', 
 		menu:'data/download-area',
@@ -695,6 +710,7 @@ function(req,res,next){
 		var id_download =req.params.link;
 		var query = connection.query('SELECT * FROM v_download where id_download='+id_download,function(err,rows)
 		{
+			accesslog(req, res);
 			if(err)
 			{
 				var errornya  = ("Error Selecting : %s ",err );
@@ -742,7 +758,7 @@ data_subdomain,
 data_download_home,
 pranala_data,
 function(req, res, next) {
-	
+	accesslog(req, res);
 	res.render('portal/gallery', { 
 		title: 'Gallery', 
 		menu:'gallery', 
@@ -765,6 +781,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/gallery-single', { 
 		title: 'Gallery', 
 		menu:'gallery-single', 
@@ -787,6 +804,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'Hubungi Kami', 
 		menu:'pages/hubungi-kami',
@@ -809,6 +827,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'Halaman Profil', 
 		menu:'pages',
@@ -830,6 +849,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'Selayang pandang', 
 		menu: 'pages/profil',
@@ -855,6 +875,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'Rencana Aksi Daerah PPK', 
 		menu: 'pages/aksidaerah',
@@ -879,6 +900,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/rencanaanggaran',
@@ -907,6 +929,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/pengadaan',
@@ -931,6 +954,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/perizinan',
@@ -955,6 +979,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/sdm',
@@ -979,6 +1004,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/apip',
@@ -1003,6 +1029,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/spip',
@@ -1027,6 +1054,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/aset',
@@ -1051,6 +1079,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/partisipasipublik',
@@ -1075,6 +1104,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/pendidikan',
@@ -1099,6 +1129,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'KESEHATAN', 
 		menu: 'pages/aksidaerah/kesehatan',
@@ -1123,6 +1154,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/infra',
@@ -1147,6 +1179,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pages', { 
 		title: 'DATA TIDAK TERSEDIA', 
 		menu: 'pages/aksidaerah/pendapatan',
@@ -1179,6 +1212,7 @@ function(req,res,next){
 		var id_pengumuman =req.params.link;
 		var query = connection.query('SELECT * FROM v_siaranpers where id_pengumuman='+id_pengumuman,function(err,rows)
 		{
+			accesslog(req, res);
 			if(err)
 			{
 				var errornya  = ("Error Selecting : %s ",err );
@@ -1226,19 +1260,20 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
-res.render('portal/pages', { 
-	title: 'Visi dan Misi', 
-	menu: 'pages/visimisi',
-	bread1:'Profil',
-	bread1_url:'pages',
-	desc: 'Visi dan Misi ',
-	desc2:'Pemerintah Kota Tanjungpinang',
-	icon: 'fa-tasks',
-	beritapopuler: req.berita_populers,
-	datasubdomain:req.data_subdomains,
-	datadownloadhome:req.datadownloadhome,
-	pranala:req.pranala,
-	session: req.session
+	accesslog(req, res);
+	res.render('portal/pages', { 
+		title: 'Visi dan Misi', 
+		menu: 'pages/visimisi',
+		bread1:'Profil',
+		bread1_url:'pages',
+		desc: 'Visi dan Misi ',
+		desc2:'Pemerintah Kota Tanjungpinang',
+		icon: 'fa-tasks',
+		beritapopuler: req.berita_populers,
+		datasubdomain:req.data_subdomains,
+		datadownloadhome:req.datadownloadhome,
+		pranala:req.pranala,
+		session: req.session
 	});
 });
 /* 	-------AKHIR HALAMAN VISI DAN MISI------- */
@@ -1250,19 +1285,20 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
-res.render('portal/pages', { 
-	title: 'Lambang dan Moto',
-	menu: 'pages/lambangmoto',
-	bread1:'Profil',
-	bread1_url:'pages',
-	desc: 'Lambang dan Motto ',
-	desc2:'Pemerintah Kota Tanjungpinang',
-	icon: 'fa-shield',
-	beritapopuler: req.berita_populers,
-	datasubdomain:req.data_subdomains,
-	datadownloadhome:req.datadownloadhome,
-	pranala:req.pranala,
-	session: req.session
+	accesslog(req, res);
+	res.render('portal/pages', { 
+		title: 'Lambang dan Moto',
+		menu: 'pages/lambangmoto',
+		bread1:'Profil',
+		bread1_url:'pages',
+		desc: 'Lambang dan Motto ',
+		desc2:'Pemerintah Kota Tanjungpinang',
+		icon: 'fa-shield',
+		beritapopuler: req.berita_populers,
+		datasubdomain:req.data_subdomains,
+		datadownloadhome:req.datadownloadhome,
+		pranala:req.pranala,
+		session: req.session
 	});
 });
 /* 	-------AKHIR HALAMAN LAMBANG DAN MOTTO------- */
@@ -1274,19 +1310,20 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
-res.render('portal/pages', { 
-	title: 'Kepala Daerah', 
-	menu: 'pages/kepaladaerah',
-	bread1:'Profil',
-	bread1_url:'pages',
-	desc: 'Sambutan Kepala Daerah ',
-	desc2:'Pemerintah Kota Tanjungpinang',
-	icon: 'el-torso',
-	beritapopuler: req.berita_populers,
-	datasubdomain:req.data_subdomains,
-	datadownloadhome:req.datadownloadhome,
-	pranala:req.pranala,
-	session: req.session
+	accesslog(req, res);
+	res.render('portal/pages', { 
+		title: 'Kepala Daerah', 
+		menu: 'pages/kepaladaerah',
+		bread1:'Profil',
+		bread1_url:'pages',
+		desc: 'Sambutan Kepala Daerah ',
+		desc2:'Pemerintah Kota Tanjungpinang',
+		icon: 'el-torso',
+		beritapopuler: req.berita_populers,
+		datasubdomain:req.data_subdomains,
+		datadownloadhome:req.datadownloadhome,
+		pranala:req.pranala,
+		session: req.session
 	});
 });
 /* 	-------AKHIR HALAMAN KEPALA DAERAH------- */
@@ -1298,19 +1335,20 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
-res.render('portal/pages', {
-	title: 'Struktur Organisasi',
-	menu: 'pages/strukturorg',
-	bread1:'Profil',
-	bread1_url:'pages',
-	desc: 'Struktur Organisasi ',
-	desc2:'Pemerintah Kota Tanjungpinang',
-	icon: 'fa-group',
-	beritapopuler: req.berita_populers,
-	datasubdomain:req.data_subdomains,
-	datadownloadhome:req.datadownloadhome,
-	pranala:req.pranala,
-	session: req.session
+	accesslog(req, res);
+	res.render('portal/pages', {
+		title: 'Struktur Organisasi',
+		menu: 'pages/strukturorg',
+		bread1:'Profil',
+		bread1_url:'pages',
+		desc: 'Struktur Organisasi ',
+		desc2:'Pemerintah Kota Tanjungpinang',
+		icon: 'fa-group',
+		beritapopuler: req.berita_populers,
+		datasubdomain:req.data_subdomains,
+		datadownloadhome:req.datadownloadhome,
+		pranala:req.pranala,
+		session: req.session
 	});
 });
 /* 	-------AKHIR HALAMAN STRUKTUR ORGANISASI------- */
@@ -1322,6 +1360,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pranala-luar', { 
 		title: 'Pranala Luar', 
 		menu:'pranala-luar',
@@ -1344,6 +1383,7 @@ data_download_home,
 data_subdomain,
 pranala_data,
 function(req, res, next) {
+	accesslog(req, res);
 	res.render('portal/pranala-luar', { 
 		title: 'Sub Domain', 
 		menu:'data/subdomain',
@@ -1364,10 +1404,14 @@ function(req, res, next) {
 
 /* GET login page. */
 router.get('/login',function(req,res,next){
-	res.render('main/login',{title:"Login"});
+	accesslog(req, res);
+	res.render('main/login',
+	{
+		title:"Login"
+	});
 });
 router.post('/login',function(req,res,next){
-
+	accesslog(req, res);
 	session_store=req.session;
 	req.assert('txtUsername', 'Username belum diisi').notEmpty();
 	req.assert('txtPassword', 'Password belum diisi').notEmpty();
@@ -1417,8 +1461,10 @@ router.post('/login',function(req,res,next){
 		res.redirect('/login');
 	}
 });
-router.get('/logout', function(req, res)
+router.get('/logout', 
+function(req, res)
 {
+	accesslog(req, res);
 	req.session.destroy(function(err)
 	{
 		if(err)
@@ -1432,8 +1478,9 @@ router.get('/logout', function(req, res)
 	});
 });
 
-router.post('/',function(req,res,next){
-
+router.post('/',
+function(req,res,next){
+	accesslog(req, res);
 	session_store=req.session;
 	var errors = req.validationErrors();
 	if (!errors) {
@@ -1477,8 +1524,10 @@ router.post('/',function(req,res,next){
 		req.flash('msg_error', errors_detail);
 	}
 });
-router.get('/logouthome', function(req, res)
+router.get('/logouthome', 
+function(req, res)
 {
+	accesslog(req, res);
 	req.session.destroy(function(err)
 	{
 		if(err)
